@@ -1,53 +1,112 @@
-/* Centrar el contenido en la pantalla */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
 body {
-font-family: Arial, sans-serif;
-background-color: #f4f6f9;
-display: flex;
-justify-content: center;
-align-items: center;
-height: 100vh;
-margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f9;
 }
-/* Estilo de la tarjeta blanca del formulario */
+
+
+
 .login-container {
-background-color: white;
-padding: 30px;
-border-radius: 8px;
-box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-width: 300px;
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+    width: 320px;
+    margin: 100px auto;
+    text-align: center;
 }
 
-/* Diseño de las cajas de texto */
+.login-container h2 {
+    margin-bottom: 20px;
+}
+
+
 input {
-width: 100%;
-padding: 10px;
-margin-top: 5px;
-border: 1px solid #ccc;
-border-radius: 4px;
-box-sizing: border-box;
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
 }
 
-/* Diseño del botón de ingreso */
+
 button {
-width: 100%;
-padding: 10px;
-background-color: #007bff;
-color: white;
-border: none;
-border-radius: 4px;
-cursor: pointer;
-font-weight: bold;
-margin-top: 15px;
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 15px;
 }
 
 button:hover {
-background-color: #0056b3;
+    background-color: #0056b3;
 }
-/* Estilos para el Módulo de Inventario */
+
+
+
+.navbar {
+    background-color: #343a40;
+    color: white;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.btn-salir {
+    background-color: #dc3545;
+    color: white;
+    padding: 8px 12px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.btn-salir:hover {
+    background-color: #b02a37;
+}
+
+
+
+.dashboard-menu {
+    display: flex;
+    gap: 20px;
+    padding: 40px;
+    justify-content: center;
+}
+
+.tarjeta-modulo {
+    background-color: white;
+    padding: 20px;
+    width: 220px;
+    border-radius: 10px;
+    text-align: center;
+    text-decoration: none;
+    color: #333;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    transition: 0.3s;
+}
+
+.tarjeta-modulo:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+
+
 
 .contenedor-tabla {
-    margin-top: 100px;
-    padding: 20px 50px;
+    margin: 60px auto;
+    width: 90%;
 }
 
 .btn-nuevo {
@@ -55,29 +114,34 @@ background-color: #0056b3;
     color: white;
     padding: 10px 15px;
     border: none;
-    border-radius: 4px;
+    border-radius: 6px;
     cursor: pointer;
     margin-bottom: 15px;
     font-weight: bold;
 }
 
-.tabla-inventario {
-    width: 100%;
-    border-collapse: collapse; /* Une los bordes de la tabla */
-    background-color: white;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+.btn-nuevo:hover {
+    background-color: #218838;
 }
 
-.tabla-inventario th,
-.tabla-inventario td {
-    padding: 12px 15px;
-    border-bottom: 1px solid #ddd;
-    text-align: left;
+
+.tabla-inventario {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
 .tabla-inventario th {
     background-color: #f8f9fa;
-    color: #333;
+    padding: 12px;
+}
+
+.tabla-inventario td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
 }
 
 .tabla-inventario tr:hover {
