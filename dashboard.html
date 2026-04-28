@@ -1,34 +1,40 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<title>Dashboard - Sistema de Inventario</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <title>Dashboard - Sistema de Inventario</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<!-- Barra de navegación superior (Navbar) -->
+
+<!-- Barra de navegación -->
 <nav class="navbar">
-
-<h2>Inventario Oficial</h2>
-
-
-
-<a href="index.html" class="btn-salir">Cerrar Sesión</a>
+    <h2>Inventario Oficial</h2>
+    <a href="index.html" class="btn-salir">Cerrar Sesión</a>
 </nav>
-<!-- Menú de módulos del sistema usando flexbox -->
+
+<!-- Menú de módulos -->
 <div class="dashboard-menu">
-<div class="tarjeta-modulo">
-<h3>📦 Inventario</h3>
-<p>Gestionar el catálogo de productos y existencias.</p>
+
+    <!-- INVENTARIO (clickeable) -->
+    <a href="inventario.html" class="tarjeta-modulo">
+        <h3>📦 Inventario</h3>
+        <p>Gestionar el catálogo de productos y existencias.</p>
+    </a>
+
+    <!-- Compras -->
+    <div class="tarjeta-modulo">
+        <h3>🛒 Compras</h3>
+        <p>Registrar nuevos ingresos de mercadería al sistema.</p>
+    </div>
+
+    <!-- Ventas -->
+    <div class="tarjeta-modulo">
+        <h3>💰 Ventas</h3>
+        <p>Módulo de facturación y salida de productos.</p>
+    </div>
+
 </div>
-<div class="tarjeta-modulo">
-<h3>🛒 Compras</h3>
-<p>Registrar nuevos ingresos de mercadería al sistema.</p>
-</div>
-<div class="tarjeta-modulo">
-<h3>💰 Ventas</h3>
-<p>Módulo de facturación y salida de productos.</p>
-</div>
-</div>
+
 </body>
 </html>
