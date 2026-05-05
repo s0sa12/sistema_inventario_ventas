@@ -18,3 +18,17 @@ categoria VARCHAR(50) NOT NULL,
 stock INT NOT NULL,
 precio DECIMAL(10, 2) NOT NULL
 );
+
+//Insertamos usuarios por defecto del sistema//
+
+INSERT INTO usuarios (nombre_completo, usuario, password, rol) VALUES
+('Administrador Principal', 'admin', 'admin123', 'Administrador'),
+('Cajero de Turno', 'cajero1', 'ventas2024', 'Cajero');
+
+//Insertamos lote de inventario inicial//
+
+INSERT INTO productos(nombre_producto,categoria,stock,precio)VALUES
+("Laptop Dell Inspiron 15","Computadoras",10,650.00),
+("Mouse Inalambrico Logitecht","Accesorios",25, 15.50),
+("Impresora Epson EcoTank","Oficina",5,210.00),
+("Resma de Papel Tamaño Carta","Papeleria",100,4.25);
