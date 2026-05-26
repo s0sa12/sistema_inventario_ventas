@@ -52,4 +52,4 @@ INNER JOIN categorias c ON p.categoria_id = c.id;
 SELECT p.id, p.nombre_producto, c.nombre_categoria, p.stock, p.precio
 FROM productos p
 INNER JOIN categorias c ON p.categoria_id = c.id
-WHERE c.nombre_categoria = 'Accesorios';
+WHERE c.nombre_categoria = 'Accesorios'; 
