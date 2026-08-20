@@ -1,5 +1,5 @@
-```php
 <?php
+
 session_start();
 
 // 1. Candado de seguridad: Solo usuarios logueados
@@ -27,214 +27,208 @@ $capital_inventario = $fila_valor['capital'] ? $fila_valor['capital'] : 0;
 $res_caro = $conn->query("SELECT MAX(precio) AS max_precio FROM productos");
 $fila_caro = $res_caro->fetch_assoc();
 $precio_maximo = $fila_caro['max_precio'] ? $fila_caro['max_precio'] : 0;
+
 ?>
 
 <!DOCTYPE html>
 <html lang="es">
 
 <head>
+    <meta charset="UTF-8">
+    <title>Panel de Control - Sistema de Ventas</title>
 
-<meta charset="UTF-8">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f1f5f9;
+            margin: 0;
+            padding: 20px;
+        }
 
-<title>Panel de Control - Sistema de Ventas</title>
+        .navbar {
+            background: #1e293b;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
 
-<style>
+        .navbar h1 {
+            margin: 0;
+            font-size: 22px;
+        }
 
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f1f5f9;
-    margin: 0;
-    padding: 20px;
-}
+        .btn-salir {
+            background: #ef4444;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+        }
 
-.navbar {
-    background: #1e293b;
-    color: white;
-    padding: 15px 25px;
-    border-radius: 8px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 30px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-}
+        /* Contenedor Flexbox para las Tarjetas */
+        .tarjetas-container {
+            display: flex;
+            gap: 20px;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
 
-.navbar h1 {
-    margin: 0;
-    font-size: 22px;
-}
+        /* Diseño de cada Métrica */
+        .tarjeta {
+            background: white;
+            flex: 1;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            text-align: center;
+            border-top: 5px solid #3b82f6;
+        }
 
-.btn-salir {
-    background: #ef4444;
-    color: white;
-    padding: 8px 15px;
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: bold;
-}
+        .tarjeta.verde {
+            border-top-color: #10b981;
+        }
 
-/* Contenedor Flexbox para las Tarjetas */
+        .tarjeta.naranja {
+            border-top-color: #f59e0b;
+        }
 
-.tarjetas-container {
-    display: flex;
-    gap: 20px;
-    justify-content: space-between;
-    margin-bottom: 30px;
-}
+        .tarjeta h3 {
+            color: #64748b;
+            margin: 0 0 10px 0;
+            font-size: 16px;
+            text-transform: uppercase;
+        }
 
-/* Diseño de cada Métrica */
+        .tarjeta .numero {
+            font-size: 32px;
+            font-weight: bold;
+            color: #0f172a;
+            margin: 0;
+        }
 
-.tarjeta {
-    background: white;
-    flex: 1;
-    padding: 25px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-    text-align: center;
-    border-top: 5px solid #3b82f6;
-}
+        /* Menú de accesos rápidos */
+        .menu-modulos {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
 
-.tarjeta.verde {
-    border-top-color: #10b981;
-}
+        .modulo {
+            background: #3b82f6;
+            color: white;
+            flex: 1;
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
 
-.tarjeta.naranja {
-    border-top-color: #f59e0b;
-}
-
-.tarjeta h3 {
-    color: #64748b;
-    margin: 0 0 10px 0;
-    font-size: 16px;
-    text-transform: uppercase;
-}
-
-.tarjeta .numero {
-    font-size: 32px;
-    font-weight: bold;
-    color: #0f172a;
-    margin: 0;
-}
-
-/* Menú de accesos rápidos */
-
-.menu-modulos {
-    display: flex;
-    gap: 20px;
-}
-
-.modulo {
-    background: #3b82f6;
-    color: white;
-    flex: 1;
-    padding: 20px;
-    text-align: center;
-    border-radius: 8px;
-    text-decoration: none;
-    font-size: 18px;
-    font-weight: bold;
-    transition: background 0.3s;
-}
-
-.modulo:hover {
-    background: #2563eb;
-}
-
-</style>
+        .modulo:hover {
+            background: #2563eb;
+        }
+    </style>
 
 </head>
 
 <body>
 
-<!-- Barra Superior -->
+    <!-- Barra Superior -->
+    <div class="navbar">
 
-<div class="navbar">
+        <h1>
+            Bienvenido, <?php echo $_SESSION['nombre']; ?>
 
-    <h1>
-        Bienvenido, <?php echo $_SESSION['nombre']; ?>
+            <span style="font-size: 14px; color: #94a3b8;">
+                (Rol: <?php echo $_SESSION['rol']; ?>)
+            </span>
+        </h1>
 
-        <span style="font-size: 14px; color: #94a3b8;">
-            (Rol: <?php echo $_SESSION['rol']; ?>)
-        </span>
-    </h1>
-
-    <a href="logout.php" class="btn-salir">
-        Cerrar Sesión
-    </a>
-
-</div>
-
-
-<!-- Panel de Métricas Dinámicas -->
-
-<div class="tarjetas-container">
-
-    <div class="tarjeta">
-
-        <h3>Total de Productos</h3>
-
-        <p class="numero">
-            <?php echo $total_productos; ?> unds
-        </p>
+        <a href="logout.php" class="btn-salir">
+            Cerrar Sesión
+        </a>
 
     </div>
 
 
-    <div class="tarjeta verde">
+    <!-- Panel de Métricas Dinámicas -->
+    <div class="tarjetas-container">
 
-        <h3>Capital Invertido</h3>
+        <div class="tarjeta">
 
-        <p class="numero">
-            $<?php echo number_format($capital_inventario, 2); ?>
-        </p>
+            <h3>Total de Productos</h3>
+
+            <p class="numero">
+                <?php echo $total_productos; ?> unds
+            </p>
+
+        </div>
+
+
+        <div class="tarjeta verde">
+
+            <h3>Capital Invertido</h3>
+
+            <p class="numero">
+                $<?php echo number_format($capital_inventario, 2); ?>
+            </p>
+
+        </div>
+
+
+        <div class="tarjeta naranja">
+
+            <h3>Producto de Mayor Precio</h3>
+
+            <p class="numero">
+                $<?php echo number_format($precio_maximo, 2); ?>
+            </p>
+
+        </div>
 
     </div>
 
 
-    <div class="tarjeta naranja">
+    <!-- Accesos Rápidos del Sistema -->
+    <h2 style="color: #334155;">
+        Módulos del Sistema
+    </h2>
 
-        <h3>Producto de Mayor Precio</h3>
+    <div class="menu-modulos">
 
-        <p class="numero">
-            $<?php echo number_format($precio_maximo, 2); ?>
-        </p>
+        <!-- Módulo de Inventario -->
+        <a href="inventario.php" class="modulo">
+            📦 Ir al Catálogo de Inventario
+        </a>
+
+
+        <!-- Módulo de Proveedores -->
+        <a href="proveedores.php" class="modulo">
+            🚚 Módulo de Proveedores
+        </a>
+
+
+        <!-- NUEVO MÓDULO: INGRESO DE MERCADERÍA -->
+        <a href="nueva_compra.php" class="modulo" style="background:#10b981;">
+            📥 Registrar Ingreso de Mercadería
+        </a>
+
+
+        <!-- Punto de Venta -->
+        <a href="#" class="modulo" style="background:#64748b;">
+            🛒 Punto de Venta (Próximamente)
+        </a>
 
     </div>
-
-</div>
-
-
-<!-- Accesos Rápidos del Sistema -->
-
-<h2 style="color: #334155;">
-    Módulos del Sistema
-</h2>
-
-<div class="menu-modulos">
-
-    <!-- Módulo de Inventario -->
-
-    <a href="inventario.php" class="modulo">
-        📦 Ir al Catálogo de Inventario
-    </a>
-
-
-    <!-- NUEVO MÓDULO DE PROVEEDORES -->
-
-    <a href="proveedores.php" class="modulo">
-        🚚 Módulo de Proveedores
-    </a>
-
-
-    <!-- Punto de Venta -->
-
-    <a href="#" class="modulo" style="background:#64748b;">
-        🛒 Punto de Venta (Próximamente)
-    </a>
-
-</div>
 
 </body>
 
 </html>
-```
